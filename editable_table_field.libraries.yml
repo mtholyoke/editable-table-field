@@ -1,0 +1,7 @@
+edit_button:
+  css:
+  js:
+    js/edit-button.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
