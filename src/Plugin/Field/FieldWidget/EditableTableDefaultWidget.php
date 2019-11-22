@@ -1,4 +1,5 @@
 <?php
+
 namespace Drupal\editable_table_field\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
@@ -25,22 +26,11 @@ class EditableTableDefaultWidget extends WidgetBase {
    *
    * Here there is a list of allowed element types: https://goo.gl/XVd4tA
    */
-  public function formElement(
-    FieldItemListInterface $items,
-    $delta,
-    Array $element,
-    Array &$form,
-    FormStateInterface $formState
-  ) {
-    // Table
+  public function formElement(FieldItemListInterface $items, $delta, Array $element, Array &$form, FormStateInterface $formState) {
     $element['table'] = [
       '#type' => 'textfield',
       '#title' => t('Table'),
-
-      // Set here the current value for this field, or a default value (or
-      // null) if there is no a value
-      '#default_value' => isset($items[$delta]->table) ?
-          $items[$delta]->table : "",
+      '#default_value' => isset($items[$delta]->table) ? $items[$delta]->table : "",
       '#empty_value' => '',
       '#placeholder' => t('Table'),
     ];
@@ -79,7 +69,6 @@ class EditableTableDefaultWidget extends WidgetBase {
     //     // Allow the media library to be opened even if there are form errors.
     //     '#limit_validation_errors' => [],
     //   ];
-
     return $element;
   }
 
@@ -91,4 +80,4 @@ class EditableTableDefaultWidget extends WidgetBase {
   //     ->addCommand(new OpenModalDialogCommand($dialog_options['title'], $library_ui, $dialog_options));
   // }
 
-} // class
+}

@@ -1,11 +1,7 @@
-name: LITS Editable Table
-description: A field for adding the editable table web component to the page
-
-# The type must be 'module' and the package must be 'Field types'
+name: Editable Table Field
+description: A field for adding the editable table web component to an entity.
 type: module
 package: Field types
 core: 8.x
-
-# The list of dependencies must contains the 'field' value
 dependencies:
   - field

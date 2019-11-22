@@ -1,4 +1,5 @@
 <?php
+
 namespace Drupal\editable_table_field\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
@@ -66,4 +67,4 @@ class EditableTable extends FieldItemBase {
     return $isEmpty;
   }
 
-} // class
+}

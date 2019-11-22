@@ -17,6 +17,7 @@ use Drupal\Core\Field\FormatterBase;
  * )
  */
 class EditableTableDefaultFormatter extends FormatterBase {
+
   /**
    * Define how the field type is showed.
    *
@@ -28,10 +29,10 @@ class EditableTableDefaultFormatter extends FormatterBase {
     foreach ($items as $delta => $item) {
       $elements[$delta] = [
         '#type' => 'markup',
-        '#markup' => $item->table
+        '#markup' => $item->table,
       ];
     }
     return $elements;
   }
 
-} // class
+}
