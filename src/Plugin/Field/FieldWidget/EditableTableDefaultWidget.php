@@ -43,14 +43,10 @@ class EditableTableDefaultWidget extends WidgetBase {
       '#type' => 'submit',
       '#value' => t('Edit me!'),
       '#name' => 'modal-open-button',
-      //doesn't work anymore...
-      '#attached' => ['library' => ['editable_table_field/edit_button']],
       '#attributes' => [
         'class' => [
           'editable-table-field_edit-button', 
-          // 'use-ajax'
         ],
-        // 'data-dialog-type' => 'modal',
       ],
       '#ajax' => [
         'callback' => [$this, 'ajax_test_dialog_form_callback_modal'],
@@ -64,8 +60,19 @@ class EditableTableDefaultWidget extends WidgetBase {
    * AJAX callback handler for ajax_test_dialog_form().
    */
   public static function ajax_test_dialog_form_callback_modal($form, &$form_state) {
-    $content['#markup'] = "Accessible table editor?";
-    $content['#attached']['library'][] = 'core/drupal.dialog.ajax';
+    // it's a custom name and might depend on your own field name. 
+    $field_name = 'field_test';
+    $value = $form_state->getValue($field_name)[0]['table'];
+    $content = [
+      '#type' => 'container',
+      'content' => [
+        '#type' => 'html_tag',
+        '#tag' => 'div',
+        'content' => ['#markup' => $value],
+        '#attributes' => ['class' => ['foo']],
+      ],
+      '#attached' => ['library' => ['core/drupal.dialog.ajax']],
+    ];
     $title = "Hi, I'm a Modal";
     $response = new AjaxResponse();
     $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '700']));
