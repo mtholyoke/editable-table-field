@@ -16,7 +16,7 @@
     attach: context => {
       const $button = $(".editable-table-field_edit-button", context);
       $button.click(event => {
-        alert("clicked!");
+        console.log("clicked!");
       });
     }
   };

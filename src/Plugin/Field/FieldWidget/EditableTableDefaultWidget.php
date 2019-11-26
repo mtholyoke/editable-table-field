@@ -5,6 +5,9 @@ namespace Drupal\editable_table_field\Plugin\Field\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\OpenModalDialogCommand;
+
 
 /**
  * Plugin implementation of the 'EditableTableDefaultWidget' widget.
@@ -37,47 +40,35 @@ class EditableTableDefaultWidget extends WidgetBase {
 
     // This is a sketch and might not be right.
     $element['button'] = [
-      '#type' => 'button',
+      '#type' => 'submit',
       '#value' => t('Edit me!'),
+      '#name' => 'modal-open-button',
+      //doesn't work anymore...
       '#attached' => ['library' => ['editable_table_field/edit_button']],
-      // TODO: this part doesn't work and we need something like it that does.
       '#attributes' => [
-        'class' => ['editable-table-field_edit-button'],
-        'onclick' => 'return (false);',
+        'class' => [
+          'editable-table-field_edit-button', 
+          // 'use-ajax'
+        ],
+        // 'data-dialog-type' => 'modal',
+      ],
+      '#ajax' => [
+        'callback' => [$this, 'ajax_test_dialog_form_callback_modal'],
       ],
     ];
 
-    // $state = "start";
-    //   $element['media_library_open_button'] = [
-    //     '#type' => 'submit',
-    //     '#value' => $this->t('Add media'),
-    //     '#name' => 'media-library-open-button',
-    //     '#attributes' => [
-    //       'class' => [
-    //         'media-library-open-button',
-    //         'js-media-library-open-button',
-    //       ],
-    //       // The jQuery UI dialog automatically moves focus to the first :tabbable
-    //       // element of the modal, so we need to disable refocus on the button.
-    //       'data-disable-refocus' => 'true',
-    //     ],
-    //     '#media_library_state' => $state,
-    //     '#ajax' => [
-    //       'callback' => [static::class, 'openMediaLibrary'],
-    //     ],
-    //     '#submit' => [],
-    //     // Allow the media library to be opened even if there are form errors.
-    //     '#limit_validation_errors' => [],
-    //   ];
     return $element;
   }
 
-  // public static function openMediaLibrary(array $form, FormStateInterface $form_state) {
-  //   $triggering_element = $form_state->getTriggeringElement();
-  //   $library_ui = \Drupal::service('media_library.ui_builder')->buildUi($triggering_element['#media_library_state']);
-  //   $dialog_options = MediaLibraryUiBuilder::dialogOptions();
-  //   return (new AjaxResponse())
-  //     ->addCommand(new OpenModalDialogCommand($dialog_options['title'], $library_ui, $dialog_options));
-  // }
-
+  /**
+   * AJAX callback handler for ajax_test_dialog_form().
+   */
+  public static function ajax_test_dialog_form_callback_modal($form, &$form_state) {
+    $content['#markup'] = "Accessible table editor?";
+    $content['#attached']['library'][] = 'core/drupal.dialog.ajax';
+    $title = "Hi, I'm a Modal";
+    $response = new AjaxResponse();
+    $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '700']));
+    return $response;
+  }
 }
