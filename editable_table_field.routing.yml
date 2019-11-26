@@ -1,0 +1,9 @@
+editable_table_field.edit_form:
+  path: /admin/editable_table_field/edit-form
+  defaults:
+    _title: 'Edit Form'
+    _controller: '\Drupal\editable_table_field\Controller\ModalFormController::openModalForm'
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: TRUE

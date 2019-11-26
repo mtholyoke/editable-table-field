@@ -5,6 +5,7 @@ namespace Drupal\editable_table_field\Plugin\Field\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Plugin implementation of the 'EditableTableDefaultWidget' widget.
@@ -29,55 +30,27 @@ class EditableTableDefaultWidget extends WidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, Array $element, Array &$form, FormStateInterface $formState) {
     $element['table'] = [
       '#type' => 'textfield',
-      '#title' => t('Table'),
+      '#title' => $this->t('Table'),
       '#default_value' => isset($items[$delta]->table) ? $items[$delta]->table : "",
       '#empty_value' => '',
-      '#placeholder' => t('Table'),
+      '#placeholder' => '<editable-table></editable-table>',
     ];
 
     // This is a sketch and might not be right.
-    $element['button'] = [
-      '#type' => 'button',
-      '#value' => t('Edit me!'),
+    $element['open_editor'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Edit me!'),
+      '#url' => Url::fromRoute('editable_table_field.edit_form'),
       '#attached' => ['library' => ['editable_table_field/edit_button']],
       // TODO: this part doesn't work and we need something like it that does.
       '#attributes' => [
-        'class' => ['editable-table-field_edit-button'],
-        'onclick' => 'return (false);',
+        'class' => ['use-ajax', 'button'],
       ],
     ];
 
-    // $state = "start";
-    //   $element['media_library_open_button'] = [
-    //     '#type' => 'submit',
-    //     '#value' => $this->t('Add media'),
-    //     '#name' => 'media-library-open-button',
-    //     '#attributes' => [
-    //       'class' => [
-    //         'media-library-open-button',
-    //         'js-media-library-open-button',
-    //       ],
-    //       // The jQuery UI dialog automatically moves focus to the first :tabbable
-    //       // element of the modal, so we need to disable refocus on the button.
-    //       'data-disable-refocus' => 'true',
-    //     ],
-    //     '#media_library_state' => $state,
-    //     '#ajax' => [
-    //       'callback' => [static::class, 'openMediaLibrary'],
-    //     ],
-    //     '#submit' => [],
-    //     // Allow the media library to be opened even if there are form errors.
-    //     '#limit_validation_errors' => [],
-    //   ];
+    $element['#attached']['library'][] = 'core/drupal.dialog.ajax';
+
     return $element;
   }
-
-  // public static function openMediaLibrary(array $form, FormStateInterface $form_state) {
-  //   $triggering_element = $form_state->getTriggeringElement();
-  //   $library_ui = \Drupal::service('media_library.ui_builder')->buildUi($triggering_element['#media_library_state']);
-  //   $dialog_options = MediaLibraryUiBuilder::dialogOptions();
-  //   return (new AjaxResponse())
-  //     ->addCommand(new OpenModalDialogCommand($dialog_options['title'], $library_ui, $dialog_options));
-  // }
 
 }
