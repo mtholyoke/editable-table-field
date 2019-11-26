@@ -2,6 +2,7 @@
 
 namespace Drupal\editable_table_field\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -37,6 +38,8 @@ class EditableTableDefaultWidget extends WidgetBase {
       '#empty_value' => '',
       '#placeholder' => t('Table'),
     ];
+    // CSS ID of the table element above:
+    $wrapper = ['edit', $items->getName(), $delta, 'table'];
 
     // This is a sketch and might not be right.
     $element['button'] = [
@@ -45,11 +48,12 @@ class EditableTableDefaultWidget extends WidgetBase {
       '#name' => 'modal-open-button',
       '#attributes' => [
         'class' => [
-          'editable-table-field_edit-button', 
+          'editable-table-field_edit-button',
         ],
       ],
       '#ajax' => [
         'callback' => [$this, 'ajax_test_dialog_form_callback_modal'],
+        'wrapper' => Html::cleanCssIdentifier(implode('-', $wrapper));
       ],
     ];
 
@@ -60,9 +64,10 @@ class EditableTableDefaultWidget extends WidgetBase {
    * AJAX callback handler for ajax_test_dialog_form().
    */
   public static function ajax_test_dialog_form_callback_modal($form, &$form_state) {
-    // it's a custom name and might depend on your own field name. 
-    $field_name = 'field_test';
-    $value = $form_state->getValue($field_name)[0]['table'];
+    $trigger = $form_state->getTriggeringElement();
+    $field = $trigger['#parents'][0];
+    $delta = $trigger['#parents'][1];
+    $value = $form_state->getValue($field)[$delta]['table'];
     $content = [
       '#type' => 'container',
       'content' => [
@@ -73,9 +78,9 @@ class EditableTableDefaultWidget extends WidgetBase {
       ],
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
     ];
-    $title = "Hi, I'm a Modal";
+    $title = "Editable table";
     $response = new AjaxResponse();
-    $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '700']));
+    $response->addCommand(new OpenModalDialogCommand($title, $content));
     return $response;
   }
 }
