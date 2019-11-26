@@ -6,12 +6,12 @@ import { html, PolymerElement } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-tooltip/paper-tooltip.js";
 import "@polymer/paper-input/paper-input.js";
 import "@polymer/iron-ajax/iron-ajax.js";
-import { displayBehaviors } from "./lib/editable-table-behaviors.js";
-import "./lib/editable-table-editor-rowcol.js";
-import "./lib/editable-table-editor-toggle.js";
-import "./lib/editable-table-editor-cell.js";
-import "./lib/editable-table-styles.js";
-import "./lib/editable-table-display.js";
+import { displayBehaviors } from "./lib/editable-table-behaviors.js.js";
+import "./lib/editable-table-editor-rowcol.js.js";
+import "./lib/editable-table-editor-toggle.js.js";
+import "./lib/editable-table-editor-cell.js.js";
+import "./lib/editable-table-styles.js.js";
+import "./lib/editable-table-display.js.js";
 
 /**
  * `editable-table`

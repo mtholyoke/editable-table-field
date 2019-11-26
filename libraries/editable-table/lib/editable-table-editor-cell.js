@@ -5,7 +5,7 @@
 import { html, PolymerElement } from "@polymer/polymer/polymer-element.js";
 import "@polymer/iron-autogrow-textarea/iron-autogrow-textarea.js";
 import "@polymer/iron-a11y-keys/iron-a11y-keys.js";
-import { cellBehaviors } from "./editable-table-behaviors.js";
+import { cellBehaviors } from "./editable-table-behaviors.js.js.js";
 
 /**
  * `editable-table-editor-cell`

@@ -9,8 +9,8 @@ import "@polymer/polymer/lib/elements/dom-if.js";
 import "@polymer/iron-ajax/iron-ajax.js";
 import "@lrnwebcomponents/simple-picker/simple-picker.js";
 import { ResponsiveUtilityBehaviors } from "@lrnwebcomponents/responsive-utility/lib/responsive-utility-behaviors.js";
-import { displayBehaviors } from "./editable-table-behaviors.js";
-import "./editable-table-styles.js";
+import { displayBehaviors } from "./editable-table-behaviors.js.js.js";
+import "./editable-table-styles.js.js.js";
 
 /**
  * `editable-table-display`
@@ -527,8 +527,8 @@ class EditableTableDisplay extends displayBehaviors(
   }
   constructor() {
     super();
-    import("./editable-table-sort.js");
-    import("./editable-table-filter.js");
+    import("./editable-table-sort.js.js.js");
+    import("./editable-table-filter.js.js.js");
   }
   connectedCallback() {
     super.connectedCallback();

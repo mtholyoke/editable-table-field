@@ -6,7 +6,7 @@ import { LitElement, html, css } from "lit-element/lit-element.js";
 import "@polymer/paper-button/paper-button.js";
 import "@polymer/paper-tooltip/paper-tooltip.js";
 import "@polymer/iron-icons/iron-icons.js";
-import "./editable-table-iconset.js";
+import "./editable-table-iconset.js.js.js";
 
 /**
  * `editable-table-editor-filter`

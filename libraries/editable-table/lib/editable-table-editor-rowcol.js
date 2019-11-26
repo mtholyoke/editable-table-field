@@ -9,7 +9,7 @@ import "@polymer/paper-listbox/paper-listbox.js";
 import "@polymer/paper-item/paper-item.js";
 import "@polymer/paper-tooltip/paper-tooltip.js";
 import "@polymer/iron-icons/iron-icons.js";
-import { cellBehaviors } from "./editable-table-behaviors.js";
+import { cellBehaviors } from "./editable-table-behaviors.js.js";
 
 /**
  * `editable-table-editor-rowcol`

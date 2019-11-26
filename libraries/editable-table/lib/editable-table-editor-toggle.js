@@ -7,7 +7,7 @@ import "@polymer/paper-button/paper-button.js";
 import "@polymer/iron-icons/image-icons.js";
 import "@polymer/iron-icons/device-icons.js";
 import "@polymer/paper-tooltip/paper-tooltip.js";
-import "./editable-table-iconset.js";
+import "./editable-table-iconset.js.js";
 
 /**
  * `editable-table-editor-toggle`

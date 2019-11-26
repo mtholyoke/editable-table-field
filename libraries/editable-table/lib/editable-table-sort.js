@@ -5,7 +5,7 @@
 import { html, PolymerElement } from "@polymer/polymer/polymer-element.js";
 import "@polymer/paper-button/paper-button.js";
 import "@polymer/iron-icons/iron-icons.js";
-import "./editable-table-iconset.js";
+import "./editable-table-iconset.js.js.js";
 
 /**
  * `editable-table-editor-sort`

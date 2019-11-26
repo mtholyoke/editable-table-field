@@ -39,6 +39,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "@babel/core": "^7.7.4",
     "@lrnwebcomponents/responsive-utility": "^2.2.2",
     "@lrnwebcomponents/simple-picker": "^2.2.2",
     "@polymer/iron-a11y-keys": "^3.0.1",
@@ -55,7 +56,12 @@
     "@polymer/paper-menu-button": "^3.0.0",
     "@polymer/paper-tooltip": "^3.0.1",
     "@polymer/polymer": "^3.2.0",
-    "lit-element": "2.0.1"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "lit-element": "2.0.1",
+    "lit-html": "^0.10.0",
+    "polymer-webpack-loader": "^2.0.3",
+    "rollup": "^1.27.5"
   },
   "devDependencies": {
     "@lrnwebcomponents/deduping-fix": "^2.1.1",
