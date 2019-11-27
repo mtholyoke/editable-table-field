@@ -1,6 +1,6 @@
-edit_button:
+field_widget:
   js:
-    js/edit-button.js: {}
+    js/field-widget.js: {}
   dependencies:
     - core/drupal
     - core/jquery
