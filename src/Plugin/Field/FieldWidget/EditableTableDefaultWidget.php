@@ -72,12 +72,15 @@ class EditableTableDefaultWidget extends WidgetBase {
    * Ajax callback handler for editing the element.
    */
   public static function modalEditForm($form, &$form_state) {
+    // get the id for the field
     $trigger = $form_state->getTriggeringElement();
     $field = $trigger['#parents'][0];
     $delta = $trigger['#parents'][1];
     $value = $form_state->getValue($field)[$delta]['table'];
     $widget = $form[$field]['widget'][$delta]['table'];
     $wrapper = $trigger['#ajax']['wrapper'];
+
+    //create the form itself
     $content = [
       '#type' => 'container',
       'temp_ui' => [
@@ -88,7 +91,13 @@ class EditableTableDefaultWidget extends WidgetBase {
           '#type' => 'submit',
           '#value' => t('Save'),
           '#attributes' => ['class' => ['use-ajax-submit']],
-          '#attached' => ['library' => ['core/drupal.dialog.ajax']],
+          '#attached' => ['library' => ['field_widget/field_widget']],
+        ],
+        'cancel' => [
+          '#type' => 'submit',
+          '#value' => t('Cancel'),
+          '#attributes' => ['class' => ['use-ajax-cancel']],
+          '#attached' => ['library' => ['field_widget/field_widget']],
         ],
       ],
       'content' => [
@@ -101,7 +110,7 @@ class EditableTableDefaultWidget extends WidgetBase {
     ];
     $title = "Editable table";
     $response = new AjaxResponse();
-    $response->addCommand(new ReplaceCommand('#' . $wrapper, ['#markup' => 'yay!']));
+    #$response->addCommand(new ReplaceCommand('#' . $wrapper, ['#markup' => 'yay!']));
     // TODO: maxwidth?
     $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '95%']));
     return $response;
