@@ -69,9 +69,9 @@ class EditableTableDefaultWidget extends WidgetBase {
         '#type' => 'html_tag',
         '#tag' => 'div',
         'content' => ['#markup' => $value],
-        '#attributes' => ['class' => ['foo']],
+        '#attributes' => ['class' => ['editor-wrapper']],
       ],
-      '#attached' => ['library' => ['core/drupal.dialog.ajax']],
+      '#attached' => ['library' => ['core/drupal.dialog.ajax', 'editable_table_field/edit_button']],
     ];
     $title = "Hi, I'm a Modal";
     $response = new AjaxResponse();

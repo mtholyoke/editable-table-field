@@ -1,6 +1,15 @@
 edit_button:
+  css:
   js:
-    js/edit-button.js: {}
+    js/hax.js: {}
   dependencies:
     - core/drupal
     - core/jquery
+
+# doesn't work
+# editable-table-code:
+#   js:
+#     libraries/editable-table/editable-table.js: {}
+#   dependencies:
+#     - core/drupal
+#     - core/jquery
