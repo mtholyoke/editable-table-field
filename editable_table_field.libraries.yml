@@ -1,5 +1,6 @@
 field_widget:
   js:
+    js/editable-table.js: {}
     js/field-widget.js: {}
   dependencies:
     - core/drupal

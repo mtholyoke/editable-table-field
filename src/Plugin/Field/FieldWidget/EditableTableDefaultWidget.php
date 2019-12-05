@@ -91,7 +91,7 @@ class EditableTableDefaultWidget extends WidgetBase {
           '#type' => 'submit',
           '#value' => t('Save'),
           '#attributes' => ['class' => ['use-ajax-submit']],
-          '#attached' => ['library' => ['field_widget/field_widget']],
+          '#attached' => ['library' => ['field_widget/field_widget', 'editable-table/editable-table']],
         ],
         'cancel' => [
           '#type' => 'submit',
