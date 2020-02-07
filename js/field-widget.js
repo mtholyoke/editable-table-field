@@ -13,24 +13,31 @@
    */
   Drupal.behaviors.editableTableFieldWidget = {
     attach: context => {
-      const $input = $("#edit-field-test-0-table", context);
+      const $input = $("#edit-field-web-component-0-table", context);
       // $input.hide();
-      $input.css('color', 'red').after('(will be hidden instead of red)').after('<script type="module" src="node_modules/@lrnwebcomponents/editable-table/editable-table.js"></script>');
+      $.getScript(
+        "HTTPS://LITS.LNDO.SITE/MODULES/CONTRIB/EDITABLE-TABLE-FIELD/js/main.js"
+      );
+      $input
+        .css("color", "red")
+        .after("(will be hidden instead of red)")
+        .after("<wired-spinner spinning duration='800'/>");
       // This may need an onChange handler to update the displayed copy.
 
-      const $close =  $('[title="Close"]');
+      const $close = $('[title="Close"]');
       const $cancel = $(".use-ajax-cancel");
       const $button = $(".use-ajax-submit");
 
       $cancel.click(_ => {
         $close.click();
-      })
+      });
 
+      // eslint-disable-next-line no-unused-vars
       $button.click(_ => {
-       $data = $(".form-text")
-       $newInput = $data[$data.length-1].value;
-       $input.val($newInput);
-       $close.click();
+        const $data = $(".form-text");
+        const $newInput = $data[$data.length - 1].value;
+        $input.val($newInput);
+        $close.click();
       });
     }
   };
