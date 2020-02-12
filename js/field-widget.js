@@ -17,8 +17,18 @@ let loaded = false;
       const $input = $("#edit-field-web-component-0-table", context);
       // $input.hide();
       if (!loaded) {
+        console.log("okay");
         $.getScript(
           "HTTPS://LITS.LNDO.SITE/MODULES/CONTRIB/EDITABLE-TABLE-FIELD/js/main.js"
+        );
+        $.getScript(
+          "HTTPS://LITS.LNDO.SITE/MODULES/CONTRIB/EDITABLE-TABLE-FIELD/js/1.js"
+        );
+        $.getScript(
+          "HTTPS://LITS.LNDO.SITE/MODULES/CONTRIB/EDITABLE-TABLE-FIELD/js/2.js"
+        );
+        $.getScript(
+          "HTTPS://LITS.LNDO.SITE/MODULES/CONTRIB/EDITABLE-TABLE-FIELD/js/3.js"
         );
         loaded = true;
       }
