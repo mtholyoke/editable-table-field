@@ -8,7 +8,7 @@ use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
-use Drupal\Core\Ajax\ReplaceCommand;
+// use Drupal\Core\Ajax\ReplaceCommand;
 
 
 /**
@@ -91,7 +91,7 @@ class EditableTableDefaultWidget extends WidgetBase {
           '#type' => 'submit',
           '#value' => t('Save'),
           '#attributes' => ['class' => ['use-ajax-submit']],
-          '#attached' => ['library' => ['field_widget/field_widget', 'editable-table/editable-table']],
+          '#attached' => ['library' => ['field_widget/field_widget']],
         ],
         'cancel' => [
           '#type' => 'submit',
@@ -110,7 +110,6 @@ class EditableTableDefaultWidget extends WidgetBase {
     ];
     $title = "Editable table";
     $response = new AjaxResponse();
-    #$response->addCommand(new ReplaceCommand('#' . $wrapper, ['#markup' => 'yay!']));
     // TODO: maxwidth?
     $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '95%']));
     return $response;

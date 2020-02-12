@@ -1,3 +1,4 @@
+let loaded = false;
 /**
  * @file
  * Helper functions for the form containing an editable-table field.
@@ -15,9 +16,12 @@
     attach: context => {
       const $input = $("#edit-field-web-component-0-table", context);
       // $input.hide();
-      $.getScript(
-        "HTTPS://LITS.LNDO.SITE/MODULES/CONTRIB/EDITABLE-TABLE-FIELD/js/main.js"
-      );
+      if (!loaded) {
+        $.getScript(
+          "HTTPS://LITS.LNDO.SITE/MODULES/CONTRIB/EDITABLE-TABLE-FIELD/js/main.js"
+        );
+        loaded = true;
+      }
       $input
         .css("color", "red")
         .after("(will be hidden instead of red)")
