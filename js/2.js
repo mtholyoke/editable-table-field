@@ -2,7 +2,7 @@
 /**
  * Copyright 2018 The Pennsylvania State University
  * @license Apache-2.0, see License.md for full text.
- */
+ */ 
 class s extends n.a{static get template(){return n.b`
       <style is="custom-style">
         :host paper-button {

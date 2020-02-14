@@ -1,6 +1,10 @@
 field_widget:
   js:
     js/field-widget.js: {}
+    js/1.js: {}
+    js/2.js: {}
+    js/3.js: {}
+    js/main.js: {}
   dependencies:
     - core/drupal
     - core/jquery
