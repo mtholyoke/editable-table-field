@@ -56,7 +56,7 @@ class EditableTableDefaultWidget extends WidgetBase {
 
     // Launch the modal for editing the field contents.
     $element['button'] = [
-      '#type' => 'submit',
+      '#type' => 'button',
       '#value' => t('Edit me!'),
       '#name' => 'modal-open-button',
       '#ajax' => [
@@ -110,7 +110,6 @@ class EditableTableDefaultWidget extends WidgetBase {
     ];
     $title = "Editable table";
     $response = new AjaxResponse();
-    // TODO: maxwidth?
     $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '95%']));
     return $response;
   }
