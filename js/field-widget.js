@@ -5,7 +5,7 @@
 let loaded = false;
 let onClickAdded = false;
 
-const $template_table = '<div class="buttons">'
+const $template_table = '<div class="mystery"><div class="buttons">'
   +'<button '
   +'id="editmode-button" '
   +'aria-pressed="true" ' 
@@ -13,7 +13,7 @@ const $template_table = '<div class="buttons">'
   +'Toggle Edit Mode '
   +'</button> '
   +'</div> '
-  +'<editable-table id="editmode" edit-mode></editable-table>';
+  +'<editable-table id="editmode" edit-mode></editable-table></div>';
 
 (($, Drupal) => {
   /**
@@ -62,9 +62,8 @@ const $template_table = '<div class="buttons">'
 
       // eslint-disable-next-line no-unused-vars
       $button.click(_ => {
-        const $data = $(".form-text");
-        const $newInput = $data[$data.length - 1].value;
-        $input.val($newInput);
+        const $toSave = $(".mystery").html();
+        $input.val("<div class='mystery'>"+$toSave+"</div>");
         $close.click();
         loaded = false;
         onClickAdded = false;
