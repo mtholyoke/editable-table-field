@@ -13,7 +13,7 @@ const $template_table = '<div class="mystery"><div class="buttons">'
   +'Toggle Edit Mode '
   +'</button> '
   +'</div> '
-  +'<editable-table id="editmode" edit-mode></editable-table></div>';
+  +'<editable-table class="the_table" id="editmode" edit-mode></editable-table></div>';
 
 (($, Drupal) => {
   /**
@@ -32,15 +32,30 @@ const $template_table = '<div class="mystery"><div class="buttons">'
       const $close = $('[title="Close"]');
       const $cancel = $(".use-ajax-cancel");
       const $button = $(".use-ajax-submit");
-
-      const $table = $input.val() === "Text" ? $template_table : $input.val();
       const $edit_button = $('[title="Edit me!"]');
       $edit_button.click(function() {
         if(!loaded) {
           loaded = $('.use-ajax-submit').length > 0 ? true : false ;
-          $('.use-ajax-submit').before($table);
+          $('.use-ajax-submit').before("<div class='mystery'>"+$template_table+"</div>");
         }
         if(loaded && !onClickAdded) {
+          $tab =  $(".the_table");
+          try {
+            // console.log($tab);
+            $items = JSON.parse($input.val());
+            console.log($items);
+            $keys = Object.keys($items);
+            console.log($keys);
+            $keys.forEach(k => {
+              console.log($tab[0].k);
+              console.log($items[k]);
+
+              $tab[0][k] = $items[k];
+            });
+          }
+          catch(e) {
+            console.log("small issues, all good\n", e);
+          }
           onClickAdded = true;
           var div = document.getElementById("editmode-button");
           div.onclick = function(e){
@@ -62,8 +77,13 @@ const $template_table = '<div class="mystery"><div class="buttons">'
 
       // eslint-disable-next-line no-unused-vars
       $button.click(_ => {
-        const $toSave = $(".mystery").html();
-        $input.val("<div class='mystery'>"+$toSave+"</div>");
+        const $editedTable = $(".the_table")[0];
+        const $toSave = JSON.stringify({
+          caption: $editedTable.caption,
+          data: $editedTable.data,
+        });
+        // const $toSave = $("editable-table")[0].shadowRoot.innerHTML;
+        $input.val($toSave);
         $close.click();
         loaded = false;
         onClickAdded = false;
