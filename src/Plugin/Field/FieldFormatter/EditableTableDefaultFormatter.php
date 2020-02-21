@@ -28,9 +28,12 @@ class EditableTableDefaultFormatter extends FormatterBase {
     $elements = [];
     foreach ($items as $delta => $item) {
       $elements[$delta] = [
-        '#type' => 'markup',
+        '#type' => 'container',
         '#markup' => $item->table,
+        '#attributes' => ['id' => 'undrepressure', 'class' => ['cat']],
+        '#attached' => ['library' => ['editable_table_field/display_table']],
       ];
+      
     }
     return $elements;
   }

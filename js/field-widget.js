@@ -27,6 +27,7 @@ const $template_table = '<div class="mystery"><div class="buttons">'
   Drupal.behaviors.editableTableFieldWidget = {
     attach: _ => {
       const $input = $("#edit-field-web-component-0-table");
+      console.log($input);
       $input.css("color", "red").after("(will be hidden instead of red)");
 
       const $close = $('[title="Close"]');
@@ -41,15 +42,9 @@ const $template_table = '<div class="mystery"><div class="buttons">'
         if(loaded && !onClickAdded) {
           $tab =  $(".the_table");
           try {
-            // console.log($tab);
             $items = JSON.parse($input.val());
-            console.log($items);
             $keys = Object.keys($items);
-            console.log($keys);
             $keys.forEach(k => {
-              console.log($tab[0].k);
-              console.log($items[k]);
-
               $tab[0][k] = $items[k];
             });
           }
@@ -78,11 +73,41 @@ const $template_table = '<div class="mystery"><div class="buttons">'
       // eslint-disable-next-line no-unused-vars
       $button.click(_ => {
         const $editedTable = $(".the_table")[0];
+        console.log($(".the_table"));
         const $toSave = JSON.stringify({
           caption: $editedTable.caption,
           data: $editedTable.data,
+          hideBordered: $editedTable.hideBordered,
+          hideCondensed: $editedTable.hideCondensed,
+          hideStriped: $editedTable.hideStriped,
+          hideResponsive: $editedTable.hideResponsive,
+          hideDisplay: $editedTable.hideDisplay,
+          hideSort: $editedTable.hideSort,
+          hideFilter: $editedTable.hideFilter,
+          hideSortFilter: $editedTable.hideSortFilter,
+          csvData: $editedTable.csvData,
+          dataCsv: $editedTable.dataCsv,
+          editMode: $editedTable.editMode,
+          th: $editedTable.th,
+          row: $editedTable.row,
+          tr: $editedTable.tr,
+          cell: $editedTable.cell,
+          td: $editedTable.td,
+          bordered: $editedTable.bordered,
+          caption: $editedTable.caption,
+          columnHeader: $editedTable.columnHeader,
+          condensed: $editedTable.condensed,
+          data: $editedTable.data,
+          filter: $editedTable.filter,
+          footer: $editedTable.footer,
+          rowHeader: $editedTable.rowHeader,
+          responsive: $editedTable.responsive,
+          sort: $editedTable.sort,
+          striped: $editedTable.striped,
+          thead: $editedTable.thead,
+          tbody: $editedTable.tbody,
+          tfoot: $editedTable.tfoot,
         });
-        // const $toSave = $("editable-table")[0].shadowRoot.innerHTML;
         $input.val($toSave);
         $close.click();
         loaded = false;

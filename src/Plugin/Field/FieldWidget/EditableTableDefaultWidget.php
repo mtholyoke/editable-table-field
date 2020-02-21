@@ -37,7 +37,7 @@ class EditableTableDefaultWidget extends WidgetBase {
 
     $value = $items[$delta]->table ?: '';
     $element['table'] = [
-      '#type' => 'textfield',
+      '#type' => 'textarea',
       '#title' => t('Table'),
       '#default_value' => $value,
       '#empty_value' => '',
@@ -91,13 +91,13 @@ class EditableTableDefaultWidget extends WidgetBase {
           '#type' => 'submit',
           '#value' => t('Save'),
           '#attributes' => ['class' => ['use-ajax-submit']],
-          '#attached' => ['library' => ['field_widget/field_widget']],
+          '#attached' => ['library' => ['editable_table_field/field_widget']],
         ],
         'cancel' => [
           '#type' => 'submit',
           '#value' => t('Cancel'),
           '#attributes' => ['class' => ['use-ajax-cancel']],
-          '#attached' => ['library' => ['field_widget/field_widget']],
+          '#attached' => ['library' => ['editable_table_field/field_widget']],
         ],
       ],
       'content' => [
