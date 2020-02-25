@@ -2,9 +2,14 @@
 
 namespace Drupal\editable_table_field\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\OpenModalDialogCommand;
+// use Drupal\Core\Ajax\ReplaceCommand;
+
 
 /**
  * Plugin implementation of the 'EditableTableDefaultWidget' widget.
@@ -27,57 +32,72 @@ class EditableTableDefaultWidget extends WidgetBase {
    * Here there is a list of allowed element types: https://goo.gl/XVd4tA
    */
   public function formElement(FieldItemListInterface $items, $delta, Array $element, Array &$form, FormStateInterface $formState) {
-    $element['table'] = [
-      '#type' => 'textfield',
-      '#title' => t('Table'),
-      '#default_value' => isset($items[$delta]->table) ? $items[$delta]->table : "",
-      '#empty_value' => '',
-      '#placeholder' => t('Table'),
-    ];
+    // Add the helper JS to the containing (nonmodal) form.
+    $form['#attached']['library'][] = 'editable_table_field/field_widget';
 
-    // This is a sketch and might not be right.
+    $value = $items[$delta]->table ?: '';
+    $element['table'] = [
+      '#type' => 'textarea',
+      '#title' => t('Table'),
+      '#default_value' => $value,
+      '#attributes' => ['class' => ['input-table']],
+      '#empty_value' => '',
+      '#placeholder' => '',
+    ];
+    // Parts of the CSS ID of the table element above.
+    $wrapper = ['edit', $items->getName(), $delta, 'table'];
+
+    // Launch the modal for editing the field contents.
     $element['button'] = [
       '#type' => 'button',
       '#value' => t('Edit me!'),
-      '#attached' => ['library' => ['editable_table_field/edit_button']],
-      // TODO: this part doesn't work and we need something like it that does.
-      '#attributes' => [
-        'class' => ['editable-table-field_edit-button'],
-        'onclick' => 'return (false);',
+      '#name' => 'modal-open-button',
+      '#ajax' => [
+        'callback' => [$this, 'modalEditForm'],
+        'wrapper' => Html::cleanCssIdentifier(implode('-', $wrapper)),
       ],
     ];
 
-    // $state = "start";
-    //   $element['media_library_open_button'] = [
-    //     '#type' => 'submit',
-    //     '#value' => $this->t('Add media'),
-    //     '#name' => 'media-library-open-button',
-    //     '#attributes' => [
-    //       'class' => [
-    //         'media-library-open-button',
-    //         'js-media-library-open-button',
-    //       ],
-    //       // The jQuery UI dialog automatically moves focus to the first :tabbable
-    //       // element of the modal, so we need to disable refocus on the button.
-    //       'data-disable-refocus' => 'true',
-    //     ],
-    //     '#media_library_state' => $state,
-    //     '#ajax' => [
-    //       'callback' => [static::class, 'openMediaLibrary'],
-    //     ],
-    //     '#submit' => [],
-    //     // Allow the media library to be opened even if there are form errors.
-    //     '#limit_validation_errors' => [],
-    //   ];
     return $element;
   }
 
-  // public static function openMediaLibrary(array $form, FormStateInterface $form_state) {
-  //   $triggering_element = $form_state->getTriggeringElement();
-  //   $library_ui = \Drupal::service('media_library.ui_builder')->buildUi($triggering_element['#media_library_state']);
-  //   $dialog_options = MediaLibraryUiBuilder::dialogOptions();
-  //   return (new AjaxResponse())
-  //     ->addCommand(new OpenModalDialogCommand($dialog_options['title'], $library_ui, $dialog_options));
-  // }
+  /**
+   * Ajax callback handler for editing the element.
+   */
+  public static function modalEditForm($form, &$form_state) {
+    // get the id for the field
+    $trigger = $form_state->getTriggeringElement();
+    $field = $trigger['#parents'][0];
+    $delta = $trigger['#parents'][1];
+    $value = $form_state->getValue($field)[$delta]['table'];
+    $widget = $form[$field]['widget'][$delta]['table'];
+    $wrapper = $trigger['#ajax']['wrapper'];
 
+    //create the form itself
+    $content = [
+      '#type' => 'container',
+      'temp_ui' => [
+        '#type' => 'fieldset',
+        '#title' => t('Temp UI for ajax test'),
+        'text' => $widget,
+        'save' => [
+          '#type' => 'submit',
+          '#value' => t('Save'),
+          '#attributes' => ['class' => ['use-ajax-submit']],
+          '#attached' => ['library' => ['editable_table_field/field_widget']],
+        ],
+        'cancel' => [
+          '#type' => 'submit',
+          '#value' => t('Cancel'),
+          '#attributes' => ['class' => ['use-ajax-cancel']],
+          '#attached' => ['library' => ['editable_table_field/field_widget']],
+        ],
+      ],
+      '#attached' => ['library' => ['core/drupal.dialog.ajax']],
+    ];
+    $title = "Editable table";
+    $response = new AjaxResponse();
+    $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '95%']));
+    return $response;
+  }
 }

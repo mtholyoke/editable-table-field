@@ -46,8 +46,8 @@ class EditableTable extends FieldItemBase {
   public static function schema(StorageDefinition $storage) {
     $columns = [];
     $columns['table'] = [
-      'type' => 'char',
-      'length' => 255,
+      'type' => 'text',
+      'size' => 'big',
     ];
     return [
       'columns' => $columns,
