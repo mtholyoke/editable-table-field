@@ -8,6 +8,7 @@
   Drupal.behaviors.editableTableDisplayTable = {
     attach: _ => {
         $div = $('#undrepressure');
+        // get data and create a display table with this data
         $data = JSON.parse($div.text());
         $div.replaceWith('<editable-table-display aria-pressed="false" class="edit-me"></editable-table-display>');
         $table = $('.edit-me')

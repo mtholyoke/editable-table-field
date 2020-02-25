@@ -10,6 +10,9 @@ field_widget:
     - core/jquery
 
 display_table: 
+    css:
+      theme:
+        css/styles.css: {}
     js:
       js/display-table.js: {}
       js/1.js: {}

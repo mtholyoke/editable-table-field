@@ -41,18 +41,10 @@ class EditableTableDefaultWidget extends WidgetBase {
       '#title' => t('Table'),
       '#default_value' => $value,
       '#empty_value' => '',
-      '#placeholder' => '<editable-table/>',
+      '#placeholder' => '',
     ];
     // Parts of the CSS ID of the table element above.
     $wrapper = ['edit', $items->getName(), $delta, 'table'];
-
-    // Non-editable copy that we can apply the actual display code to:
-    $element['table_display'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'div',
-      'content' => ['#markup' => $value],
-      '#attributes' => ['class' => ['baz']],
-    ];
 
     // Launch the modal for editing the field contents.
     $element['button'] = [
@@ -99,12 +91,6 @@ class EditableTableDefaultWidget extends WidgetBase {
           '#attributes' => ['class' => ['use-ajax-cancel']],
           '#attached' => ['library' => ['editable_table_field/field_widget']],
         ],
-      ],
-      'content' => [
-        '#type' => 'html_tag',
-        '#tag' => 'div',
-        'content' => ['#markup' => $value],
-        '#attributes' => ['class' => ['foo']],
       ],
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
     ];
