@@ -40,6 +40,7 @@ class EditableTableDefaultWidget extends WidgetBase {
       '#type' => 'textarea',
       '#title' => t('Table'),
       '#default_value' => $value,
+      '#attributes' => ['class' => ['input-table']],
       '#empty_value' => '',
       '#placeholder' => '',
     ];

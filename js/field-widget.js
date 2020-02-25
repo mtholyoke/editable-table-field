@@ -27,7 +27,7 @@ const $template_table = '<div class="mystery"><div class="buttons">'
   Drupal.behaviors.editableTableFieldWidget = {
     attach: _ => {
       //get the text area with raw data and hide it
-      const $input = $("#edit-field-web-component-0-table").hide();
+      const $input = $(".input-table").hide();
       //if there is data (the table has been created) - parse it into js object
       $data = $input.val().length > 0 ? JSON.parse($input.val()): {};
       $keys = Object.keys($data);
