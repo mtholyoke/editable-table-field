@@ -92,6 +92,12 @@ class EditableTableDefaultWidget extends WidgetBase {
           '#attributes' => ['class' => ['use-ajax-cancel']],
           '#attached' => ['library' => ['editable_table_field/field_widget']],
         ],
+        'delete' => [
+          '#type' => 'button',
+          '#value' => t('Delete the table'),
+          '#attributes' => ['class' => ['delete-button']],
+          '#attached' => ['library' => ['editable_table_field/field_widget']],
+        ]
       ],
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
     ];
