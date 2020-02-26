@@ -8,8 +8,6 @@ use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
-// use Drupal\Core\Ajax\ReplaceCommand;
-
 
 /**
  * Plugin implementation of the 'EditableTableDefaultWidget' widget.
@@ -65,7 +63,7 @@ class EditableTableDefaultWidget extends WidgetBase {
    * Ajax callback handler for editing the element.
    */
   public static function modalEditForm($form, &$form_state) {
-    // get the id for the field
+    // Get the id for the field.
     $trigger = $form_state->getTriggeringElement();
     $field = $trigger['#parents'][0];
     $delta = $trigger['#parents'][1];
@@ -73,7 +71,7 @@ class EditableTableDefaultWidget extends WidgetBase {
     $widget = $form[$field]['widget'][$delta]['table'];
     $wrapper = $trigger['#ajax']['wrapper'];
 
-    //create the form itself
+    // Create the form itself.
     $content = [
       '#type' => 'container',
       'temp_ui' => [
@@ -92,6 +90,12 @@ class EditableTableDefaultWidget extends WidgetBase {
           '#attributes' => ['class' => ['use-ajax-cancel']],
           '#attached' => ['library' => ['editable_table_field/field_widget']],
         ],
+        'delete' => [
+          '#type' => 'button',
+          '#value' => t('Delete the table'),
+          '#attributes' => ['class' => ['delete-button']],
+          '#attached' => ['library' => ['editable_table_field/field_widget']],
+        ],
       ],
       '#attached' => ['library' => ['core/drupal.dialog.ajax']],
     ];
@@ -100,4 +104,5 @@ class EditableTableDefaultWidget extends WidgetBase {
     $response->addCommand(new OpenModalDialogCommand($title, $content, ['width' => '95%']));
     return $response;
   }
+
 }

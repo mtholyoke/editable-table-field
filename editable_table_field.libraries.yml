@@ -1,10 +1,10 @@
 field_widget:
   js:
     js/field-widget.js: {}
-    js/1.js: {}
-    js/2.js: {}
-    js/3.js: {}
-    js/main.js: {}
+    lib/1.js: {}
+    lib/2.js: {}
+    lib/3.js: {}
+    lib/main.js: {}
   dependencies:
     - core/drupal
     - core/jquery
@@ -15,10 +15,10 @@ display_table:
         css/styles.css: {}
     js:
       js/display-table.js: {}
-      js/1.js: {}
-      js/2.js: {}
-      js/3.js: {}
-      js/main.js: {}
+      lib/1.js: {}
+      lib/2.js: {}
+      lib/3.js: {}
+      lib/main.js: {}
     dependencies:
       - core/drupal
       - core/jquery

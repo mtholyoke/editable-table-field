@@ -33,7 +33,7 @@ class EditableTableDefaultFormatter extends FormatterBase {
         '#attributes' => ['id' => 'undrepressure', 'class' => ['cat']],
         '#attached' => ['library' => ['editable_table_field/display_table']],
       ];
-      
+
     }
     return $elements;
   }
