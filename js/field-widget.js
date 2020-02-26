@@ -131,6 +131,7 @@ function shouldDelete() {
       // save button behavior
       $button.click(() => {
         const $editedTable = $(".the_table")[0];
+        // console.log($(".the_table"));
         // save all data into toSave object
         const $toSave = {
           caption: $editedTable.caption,
